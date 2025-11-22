@@ -1,0 +1,32 @@
+<!-- <div class="container mt-5">
+  <h2>Welcome, {{ userName }}</h2>
+  <p>Selected Shop: {{ selectedShop }}</p>
+  Welcome {{ userName }}! You selected <strong>{{ selectedShop }}</strong>.
+</div> -->
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <!-- Drawer Toggle Button -->
+    <button class="btn btn-light me-3" (click)="toggleDrawer()">
+      ☰
+    </button>
+
+    <!-- Centered Shop Name -->
+    <div class="mx-auto text-white fw-bold fs-5">
+      {{ selectedShop }}
+    </div>
+    
+
+    <!-- User Info on Right -->
+    <div class="text-white ms-auto">
+      Welcome, {{ userName }}  {{ role }}
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content (can be expanded later) -->
+<div class="container mt-4">
+  <p>This is your dashboard. Customize this page with features like appointments, billing, etc.</p>
+</div>
+
+<!-- <h1>Hi, welcome to the dashboard!</h1> -->

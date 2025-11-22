@@ -1,0 +1,46 @@
+<form (ngSubmit)="onSubmit()" #userForm="ngForm">
+
+  <!-- <div>
+    <label>User ID:</label>
+    <input type="text" [(ngModel)]="user.userId" name="userId" required />
+  </div> -->
+
+  <div>
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="user.name" name="name" required />
+  </div>
+
+  <div>
+    <label>Email:</label>
+    <input type="email" [(ngModel)]="user.email" name="email" required />
+  </div>
+
+  <div>
+    <label>Mobile Number:</label>
+    <input type="text" [(ngModel)]="user.mobileNumber" name="mobileNumber" required />
+  </div>
+
+  <div>
+    <label>Age:</label>
+    <input type="number" [(ngModel)]="user.age" name="age" required />
+  </div>
+
+  <div>
+    <label>Gender:</label>
+    <select [(ngModel)]="user.gender" name="gender" required>
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
+
+  <!-- <button type="submit" [disabled]="userForm.invalid">Add User</button> -->
+  <!-- <button (click)="onSubmit()">
+  {{ isEditMode ? 'Update User' : 'Add User' }}
+</button> -->
+  <button type="submit">Submit</button>
+  <div *ngIf="submitted" style="color: green;">User saved successfully!</div>
+  <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+
+</form>

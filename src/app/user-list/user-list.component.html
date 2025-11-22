@@ -1,0 +1,25 @@
+<p>user-list worksuser component!</p>
+<h2>All Users</h2>
+<table border="1">
+  <tr>
+    <th>User ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Mobile</th>
+    <th>Gender</th>
+    <th>Age</th>
+    <th>Actions</th>
+  </tr>
+  <tr *ngFor="let user of users">
+    <td>{{ user.userId }}</td>
+    <td>{{ user.name }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.mobileNumber }}</td>
+    <td>{{ user.gender }}</td>
+    <td>{{ user.age }}</td>
+    <td>
+      <button (click)="editUser(user)">Edit</button>
+      
+    </td>
+  </tr>
+</table>
