@@ -1,49 +1,41 @@
-// import { Component } from '@angular/core';
-// import { Router } from '@angular/router';
-
-// @Component({
-//   selector: 'app-dashboard',
-//   templateUrl: './dashboard.component.html',
-//   styleUrls: ['./dashboard.component.css']
-// })
-// export class DashboardComponent {
-//   userName: string = '';
-//   selectedShop: string = '';
-
-//   constructor(private router: Router) {
-//     const nav = this.router.getCurrentNavigation();
-//     const state = nav?.extras.state as { userName: string, selectedShop: string };
-//     if (state) {
-//       this.userName = state.userName;
-//       this.selectedShop = state.selectedShop;
-//     }
-//   }
-// }
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
-  userName: string = '';
-  selectedShop: string = '';
-  role : string='';
-  constructor(private router: Router) {
-    const nav = this.router.getCurrentNavigation();
-    const state = nav?.extras?.state;
+export class DashboardComponent implements OnInit {
 
-    if (state) {
-      this.userName = state['userName'] || 'User';
-      this.selectedShop = state['selectedShop'] || 'Unknown Shop';
-      this.role = state['role']
+  userName: string = '';
+  selectedShop: any = null;
+  role: string = '';
+
+  ngOnInit(): void {
+    this.loadUserData();
+  }
+
+  loadUserData() {
+    try {
+      const userDataString = localStorage.getItem('userData');
+      const shopString = localStorage.getItem('selectedShop');
+
+      if (userDataString) {
+        const data = JSON.parse(userDataString);
+        this.userName = data.user?.name || '';
+        this.role = data.user?.role || '';
+      }
+
+      if (shopString) {
+        this.selectedShop = JSON.parse(shopString);
+      }
+
+    } catch (err) {
+      console.error('Error loading user data', err);
     }
   }
+
   toggleDrawer() {
-  alert('Drawer button clicked - you can later add side nav here');
+    alert('Drawer button clicked - you can later add side nav here');
+  }
 }
-
-}
-

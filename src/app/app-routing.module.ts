@@ -1,19 +1,5 @@
+// src/app/app-routing.module.ts
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-
-
-// @NgModule({
-//   declarations: [],
-//   imports: [
-//     CommonModule
-//   ]
-// })
-// export class AppRoutingModule { 
-
-// }
-
-//import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
@@ -21,12 +7,35 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
+
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default route
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+
   { path: 'login', component: LoginComponent },
-  { path: 'add-user', component: AddUserComponent },
-  { path: 'user-list', component: UserListComponent },
-  { path: 'dashboard', component: DashboardComponent }
+
+  // ADMIN ONLY
+  {
+    path: 'add-user',
+    component: AddUserComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRoles: ['admin'] }
+  },
+  {
+    path: 'user-list',
+    component: UserListComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRoles: ['admin'] }
+  },
+
+  // ADMIN OR COLLECTOR
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRoles: ['admin', 'collector'] }
+  }
 ];
 
 @NgModule({
